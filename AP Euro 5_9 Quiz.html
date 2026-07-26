@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Topic 5.9: Continuity and Change in 18th-Century States</title>
+<style>
+:root {
+  --ink: #1a1d1f;
+  --sub: #5b6470;
+  --line: #d7dbe0;
+  --header-bg: #eef0f2;
+  --page-bg: #f6f7f8;
+  --card-bg: #ffffff;
+  --accent: #2554c7;
+  --accent-tint: #eaf0ff;
+  --correct: #1b8a3e;
+  --correct-tint: #e9f7ee;
+  --incorrect: #c0233a;
+  --incorrect-tint: #fdecee;
+  --easy: #1b8a3e;
+  --medium: #b7791f;
+  --hard: #c0233a;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
+.masthead { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.masthead h1 { font-size: 22px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+.masthead .course-tag { font-size: 12px; font-weight: 600; color: var(--sub); letter-spacing: 0.06em; text-transform: uppercase; }
+.masthead-sub { color: var(--sub); font-size: 14.5px; margin: 0 0 26px; }
+.section-label { font-size: 13px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 0.05em; margin: 30px 0 10px; }
+.card { background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 22px; box-shadow: 0 1px 2px rgba(20,24,28,0.04); }
+.card-header { display: flex; align-items: center; gap: 12px; background: var(--header-bg); border-bottom: 1px solid var(--line); padding: 10px 16px; }
+.qnum { width: 26px; height: 26px; background: #14181c; color: #fff; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.flag { display: flex; align-items: center; gap: 6px; color: var(--sub); font-size: 13.5px; font-weight: 500; }
+.flag svg { width: 15px; height: 15px; }
+.diff-pill { margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; color: #fff; }
+.diff-easy { background: var(--easy); }
+.diff-medium { background: var(--medium); }
+.diff-hard { background: var(--hard); }
+.card-body { padding: 20px 22px 22px; }
+.passage { font-family: Georgia, "Times New Roman", serif; font-size: 16px; line-height: 1.6; color: #2a2e33; background: #fbfbfa; border: 1px solid var(--line); border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; }
+.passage p { margin: 0 0 10px; }
+.passage p:last-child { margin-bottom: 0; }
+.passage .src { font-style: italic; color: var(--sub); font-size: 14px; }
+.question { font-family: Georgia, "Times New Roman", serif; font-size: 17px; line-height: 1.5; margin: 0 0 16px; color: var(--ink); }
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 620px) { .options { grid-template-columns: 1fr; } }
+.opt { display: flex; align-items: flex-start; gap: 12px; text-align: left; border: 1.5px solid var(--line); border-radius: var(--radius); background: #fff; padding: 12px 14px; cursor: pointer; font-family: Georgia, "Times New Roman", serif; font-size: 15.5px; line-height: 1.4; color: var(--ink); transition: border-color 0.12s ease, background 0.12s ease; }
+.opt:hover:not(.locked) { border-color: var(--accent); background: var(--accent-tint); }
+.opt .letter { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #9aa3ad; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 700; flex-shrink: 0; color: var(--sub); }
+.opt.correct { border-color: var(--correct); background: var(--correct-tint); }
+.opt.correct .letter { border-color: var(--correct); background: var(--correct); color: #fff; }
+.opt.incorrect { border-color: var(--incorrect); background: var(--incorrect-tint); }
+.opt.incorrect .letter { border-color: var(--incorrect); background: var(--incorrect); color: #fff; }
+.opt.locked { cursor: default; }
+.opt.dim { opacity: 0.55; }
+.feedback { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 8px; font-size: 14.5px; line-height: 1.5; }
+.feedback.show { display: block; }
+.feedback.good { background: var(--correct-tint); color: #145a2a; border: 1px solid #b7e2c3; }
+.feedback.bad { background: var(--incorrect-tint); color: #8a1526; border: 1px solid #f1c3cb; }
+.feedback b { font-weight: 700; }
+textarea.saq-input { width: 100%; margin-top: 4px; min-height: 72px; border: 1.5px solid var(--line); border-radius: 8px; padding: 10px 12px; font-family: Georgia, "Times New Roman", serif; font-size: 14.5px; line-height: 1.5; resize: vertical; color: var(--ink); }
+textarea.saq-input:focus { outline: none; border-color: var(--accent); }
+.sample-btn { margin-top: 8px; background: none; border: 1.5px solid var(--accent); color: var(--accent); font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.sample-btn:hover { background: var(--accent-tint); }
+.sample-box { display: none; margin-top: 10px; background: var(--accent-tint); border: 1px solid #c6d6fb; border-radius: 8px; padding: 10px 14px; font-size: 14px; line-height: 1.55; color: #1c3a8a; }
+.sample-box.show { display: block; }
+.sample-box b { font-weight: 700; }
+.footer-note { text-align: center; color: var(--sub); font-size: 12.5px; margin-top: 30px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="masthead">
+    <h1>Topic 5.9: Continuity and Change in 18th-Century States</h1>
+    <div class="course-tag">AP European History &middot; Unit 5</div>
+  </div>
+  <p class="masthead-sub">4 multiple-choice questions (1 easy, 2 medium, 1 hard) + 3 standalone short-answer prompts. Click an answer to check it; click "Show sample response" to check your short-answer responses.</p>
+  
+  <div class="card">
+    <div class="card-header">
+      <div class="qnum">1</div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18M5 4h11l-2.5 4L16 12H5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mark for Review</div>
+      <div class="diff-pill diff-easy">Easy</div>
+    </div>
+    <div class="card-body">
+      
+      <p class="question">When historians evaluate what aspects of European political and social life changed versus remained the same between 1648 and 1815, they are applying which historical thinking skill?</p>
+      <div class="options">
+        <button type="button" class="opt" data-group="q1" data-correct="false" onclick="selectOption(this, false, 'q1')">
+        <span class="letter">A</span><span>Causation</span>
+      </button>
+<button type="button" class="opt" data-group="q1" data-correct="true" onclick="selectOption(this, true, 'q1')">
+        <span class="letter">B</span><span>Continuity and change over time</span>
+      </button>
+<button type="button" class="opt" data-group="q1" data-correct="false" onclick="selectOption(this, false, 'q1')">
+        <span class="letter">C</span><span>Comparison</span>
+      </button>
+<button type="button" class="opt" data-group="q1" data-correct="false" onclick="selectOption(this, false, 'q1')">
+        <span class="letter">D</span><span>Periodization</span>
+      </button>
+      </div>
+      <div class="feedback" id="fb-q1"><b>B.</b> Evaluating what changed versus remained the same applies the historical thinking skill of continuity and change over time.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="qnum">2</div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18M5 4h11l-2.5 4L16 12H5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mark for Review</div>
+      <div class="diff-pill diff-medium">Medium</div>
+    </div>
+    <div class="card-body">
+      
+      <p class="question">One significant change in European political life between 1648 and 1815 was:</p>
+      <div class="options">
+        <button type="button" class="opt" data-group="q2" data-correct="false" onclick="selectOption(this, false, 'q2')">
+        <span class="letter">A</span><span>The complete elimination of all monarchy throughout Europe</span>
+      </button>
+<button type="button" class="opt" data-group="q2" data-correct="true" onclick="selectOption(this, true, 'q2')">
+        <span class="letter">B</span><span>The emergence of new political ideas, such as popular sovereignty and nationalism, challenging traditional monarchical authority</span>
+      </button>
+<button type="button" class="opt" data-group="q2" data-correct="false" onclick="selectOption(this, false, 'q2')">
+        <span class="letter">C</span><span>A total return to purely feudal political structures</span>
+      </button>
+<button type="button" class="opt" data-group="q2" data-correct="false" onclick="selectOption(this, false, 'q2')">
+        <span class="letter">D</span><span>No significant change in political thought during this period</span>
+      </button>
+      </div>
+      <div class="feedback" id="fb-q2"><b>B.</b> A significant change was the emergence of new political ideas, such as popular sovereignty and nationalism, challenging traditional monarchical authority.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="qnum">3</div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18M5 4h11l-2.5 4L16 12H5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mark for Review</div>
+      <div class="diff-pill diff-medium">Medium</div>
+    </div>
+    <div class="card-body">
+      
+      <p class="question">Despite the political upheaval of the French Revolution and Napoleonic era, which aspect of European society demonstrated significant continuity by 1815?</p>
+      <div class="options">
+        <button type="button" class="opt" data-group="q3" data-correct="false" onclick="selectOption(this, false, 'q3')">
+        <span class="letter">A</span><span>The complete elimination of monarchy across Europe</span>
+      </button>
+<button type="button" class="opt" data-group="q3" data-correct="true" onclick="selectOption(this, true, 'q3')">
+        <span class="letter">B</span><span>Monarchy and traditional social hierarchy, which were restored in much of Europe following the Congress of Vienna</span>
+      </button>
+<button type="button" class="opt" data-group="q3" data-correct="false" onclick="selectOption(this, false, 'q3')">
+        <span class="letter">C</span><span>The total elimination of the Catholic Church's influence</span>
+      </button>
+<button type="button" class="opt" data-group="q3" data-correct="false" onclick="selectOption(this, false, 'q3')">
+        <span class="letter">D</span><span>A universal shift to democratic government throughout Europe</span>
+      </button>
+      </div>
+      <div class="feedback" id="fb-q3"><b>B.</b> Monarchy and traditional social hierarchy demonstrated significant continuity, being restored in much of Europe following the Congress of Vienna.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="qnum">4</div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18M5 4h11l-2.5 4L16 12H5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mark for Review</div>
+      <div class="diff-pill diff-hard">Hard</div>
+    </div>
+    <div class="card-body">
+      
+      <p class="question">A historian evaluating the period from 1648 to 1815 notes that while dramatic changes occurred, such as the French Revolution's challenge to traditional monarchical authority and the spread of nationalist sentiment through Napoleon's conquests, significant continuities also persisted, such as the restoration of monarchy and traditional social hierarchy in much of Europe following the Congress of Vienna. Which statement best reflects a balanced application of the continuity and change over time skill to this period?</p>
+      <div class="options">
+        <button type="button" class="opt" data-group="q4" data-correct="false" onclick="selectOption(this, false, 'q4')">
+        <span class="letter">A</span><span>This period involved only dramatic, permanent change with no meaningful continuities</span>
+      </button>
+<button type="button" class="opt" data-group="q4" data-correct="false" onclick="selectOption(this, false, 'q4')">
+        <span class="letter">B</span><span>This period involved only continuity, with no significant changes anywhere</span>
+      </button>
+<button type="button" class="opt" data-group="q4" data-correct="true" onclick="selectOption(this, true, 'q4')">
+        <span class="letter">C</span><span>This period is best understood as involving both significant changes, such as the French Revolution's political transformation and the spread of nationalism, and important continuities, such as the restoration of monarchy and social hierarchy after 1815</span>
+      </button>
+<button type="button" class="opt" data-group="q4" data-correct="false" onclick="selectOption(this, false, 'q4')">
+        <span class="letter">D</span><span>The continuity and change over time skill cannot be meaningfully applied to this period</span>
+      </button>
+      </div>
+      <div class="feedback" id="fb-q4"><b>C.</b> A balanced application recognizes both significant changes, like the French Revolution's transformation, and important continuities, like the restoration of monarchy and social hierarchy after 1815.</div>
+    </div>
+  </div>
+  <p class="section-label">Short Answer Practice</p>
+  
+  <div class="card">
+    <div class="card-header">
+      <div class="qnum">5</div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18M5 4h11l-2.5 4L16 12H5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mark for Review</div>
+      <div class="diff-pill" style="background:#5b6470;">Short Answer</div>
+    </div>
+    <div class="card-body">
+      <p class="question">Identify ONE significant political change that occurred in Europe between 1648 and 1815.</p>
+      <textarea class="saq-input" placeholder="Write your response here (2-3 sentences)..."></textarea>
+      <button type="button" class="sample-btn" onclick="toggleSample('saq-sample-5')">Show sample response</button>
+      <div class="sample-box" id="saq-sample-5"><b>Sample response:</b> The French Revolution's challenge to traditional monarchical authority, including the temporary establishment of a republic, was a significant political change during this period.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="qnum">6</div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18M5 4h11l-2.5 4L16 12H5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mark for Review</div>
+      <div class="diff-pill" style="background:#5b6470;">Short Answer</div>
+    </div>
+    <div class="card-body">
+      <p class="question">Explain ONE way that monarchy or traditional social hierarchy demonstrated continuity in Europe by 1815, despite the upheaval of the French Revolution and Napoleonic era.</p>
+      <textarea class="saq-input" placeholder="Write your response here (2-3 sentences)..."></textarea>
+      <button type="button" class="sample-btn" onclick="toggleSample('saq-sample-6')">Show sample response</button>
+      <div class="sample-box" id="saq-sample-6"><b>Sample response:</b> Following the Congress of Vienna, monarchy and traditional social hierarchy were restored in much of Europe, demonstrating significant continuity with the pre-revolutionary political order despite the intervening upheaval.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="qnum">7</div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18M5 4h11l-2.5 4L16 12H5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mark for Review</div>
+      <div class="diff-pill" style="background:#5b6470;">Short Answer</div>
+    </div>
+    <div class="card-body">
+      <p class="question">Explain ONE way that nationalism represented a significant change in European political thought by 1815.</p>
+      <textarea class="saq-input" placeholder="Write your response here (2-3 sentences)..."></textarea>
+      <button type="button" class="sample-btn" onclick="toggleSample('saq-sample-7')">Show sample response</button>
+      <div class="sample-box" id="saq-sample-7"><b>Sample response:</b> The spread of nationalist sentiment, partly fueled by Napoleon's conquests and the conquered populations' reactions to French rule, represented a significant new development in European political thought, contributing to future political movements throughout the nineteenth century.</div>
+    </div>
+  </div>
+  <p class="footer-note">Topic 5.9 &middot; Continuity and Change in 18th-Century States &mdash; Practice Quiz</p>
+</div>
+<script>
+function selectOption(btn, isCorrect, groupId) {
+  var group = document.querySelectorAll('[data-group="' + groupId + '"]');
+  var alreadyLocked = false;
+  group.forEach(function (o) { if (o.classList.contains('locked')) alreadyLocked = true; });
+  if (alreadyLocked) return;
+  group.forEach(function (o) {
+    o.classList.add('locked');
+    if (o !== btn) o.classList.add('dim');
+  });
+  btn.classList.remove('dim');
+  btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+  if (!isCorrect) {
+    group.forEach(function (o) {
+      if (o.dataset.correct === 'true') { o.classList.add('correct'); o.classList.remove('dim'); }
+    });
+  }
+  var fb = document.getElementById('fb-' + groupId);
+  if (fb) {
+    fb.classList.add('show');
+    fb.classList.add(isCorrect ? 'good' : 'bad');
+  }
+}
+function toggleSample(id) {
+  var el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+</script>
+</body>
+</html>
