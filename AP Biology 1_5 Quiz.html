@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AP Biology 1.5 Quiz: Lipids</title>
+<style>
+:root {
+  --ink: #1c2126; --sub: #5b6470; --line: #dde2e8; --page-bg: #f4f6f9; --card-bg: #ffffff;
+  --navy: #1B3A6B; --navy-dark: #132a4f; --teal: #0E7C7B;
+  --good: #1f8a44; --good-tint: #e8f6ec; --bad: #b3261e; --bad-tint: #fbecec;
+}
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; background: var(--page-bg); color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+.page { max-width: 820px; margin: 0 auto; padding: 22px 18px 90px; }
+.masthead { border-bottom: 3px solid var(--navy); padding-bottom: 12px; margin-bottom: 20px; }
+.masthead .course-tag { font-size: 12px; font-weight: 600; color: var(--sub); letter-spacing: 0.06em; text-transform: uppercase; }
+.masthead h1 { font-size: 21px; font-weight: 800; margin: 4px 0 0; color: var(--navy-dark); }
+
+.card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 18px; overflow: hidden; box-shadow: 0 1px 3px rgba(20,30,50,0.06); }
+.card-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--navy); color: #fff; }
+.card-head .q-label { font-weight: 700; font-size: 14px; }
+.diff-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.03em; }
+.diff-Easy { background: #d9f0e3; color: #146c34; }
+.diff-Medium { background: #fdecc8; color: #8a5a10; }
+.diff-Hard { background: #fbdada; color: #9b2226; }
+.card-body { padding: 16px 18px 18px; }
+.q-text { font-size: 15.5px; line-height: 1.55; margin: 0 0 14px; color: var(--ink); }
+
+.graph-wrap { text-align: center; margin-bottom: 16px; }
+.graph-wrap img { max-width: 100%; border-radius: 6px; border: 1px solid var(--line); }
+
+.opt { display: flex; align-items: flex-start; gap: 10px; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 9px; margin-bottom: 8px; cursor: pointer; transition: all 0.12s ease; font-size: 14.5px; line-height: 1.5; }
+.opt:hover { border-color: var(--navy); background: #f7f9fc; }
+.opt .opt-letter { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #eef1f5; color: var(--sub); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.opt.correct { border-color: var(--good); background: var(--good-tint); }
+.opt.correct .opt-letter { background: var(--good); color: #fff; }
+.opt.incorrect { border-color: var(--bad); background: var(--bad-tint); }
+.opt.incorrect .opt-letter { background: var(--bad); color: #fff; }
+.opt.disabled { pointer-events: none; }
+
+.feedback { display: none; margin-top: 10px; padding: 10px 13px; border-radius: 8px; font-size: 13.5px; line-height: 1.5; }
+.feedback.show { display: block; }
+.feedback.good { background: var(--good-tint); color: #146c34; }
+.feedback.bad { background: var(--bad-tint); color: #8a2020; }
+
+.frq-part { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px dashed var(--line); }
+.frq-part:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.frq-label { font-weight: 700; color: var(--navy-dark); font-size: 13.5px; margin-bottom: 6px; }
+.frq-input { width: 100%; min-height: 70px; border: 1.5px solid var(--line); border-radius: 8px; padding: 10px 12px; font-family: Georgia, serif; font-size: 14px; line-height: 1.5; resize: vertical; color: var(--ink); margin-bottom: 8px; }
+.frq-input:focus { outline: none; border-color: var(--navy); }
+.sample-btn { border: 1.5px solid var(--teal); background: #eaf6f4; color: var(--teal); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; cursor: pointer; }
+.sample-btn:hover { background: #d9f0ec; }
+.sample-box { display: none; margin-top: 8px; padding: 10px 13px; background: #eaf6f4; border-radius: 8px; font-size: 13.5px; line-height: 1.55; color: var(--navy-dark); }
+.sample-box.show { display: block; }
+.sample-box b { color: var(--teal); }
+
+.footer-note { text-align: center; color: var(--sub); font-size: 12px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="masthead">
+    <div class="course-tag">AP Biology &middot; Unit 1: Chemistry of Life</div>
+    <h1>Topic 1.5 Quiz: Lipids</h1>
+  </div>
+  
+  <div class="card">
+    <div class="card-head">
+      <span class="q-label">Question 1</span>
+      <span class="diff-badge diff-Easy">Easy</span>
+    </div>
+    <div class="card-body">
+      <p class="q-text">What property do all lipids share, due to their nonpolar hydrocarbon structure?</p>
+      <div class="opt" data-group="1-5-q1" onclick="selectOption('1-5-q1', 0, 1)"><span class="opt-letter">A</span><span>They are hydrophilic overall</span></div>
+<div class="opt" data-group="1-5-q1" onclick="selectOption('1-5-q1', 1, 1)"><span class="opt-letter">B</span><span>They are hydrophobic overall</span></div>
+<div class="opt" data-group="1-5-q1" onclick="selectOption('1-5-q1', 2, 1)"><span class="opt-letter">C</span><span>They are highly charged overall</span></div>
+<div class="opt" data-group="1-5-q1" onclick="selectOption('1-5-q1', 3, 1)"><span class="opt-letter">D</span><span>They dissolve easily in water</span></div>
+      <div class="feedback" id="fb-1-5-q1">The nonpolar hydrocarbon chains found in lipids make them hydrophobic (water-fearing).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="q-label">Question 2</span>
+      <span class="diff-badge diff-Medium">Medium</span>
+    </div>
+    <div class="card-body">
+      <p class="q-text">A triglyceride consists of a glycerol molecule bonded to how many fatty acid chains?</p>
+      <div class="opt" data-group="1-5-q2" onclick="selectOption('1-5-q2', 0, 2)"><span class="opt-letter">A</span><span>One fatty acid chain</span></div>
+<div class="opt" data-group="1-5-q2" onclick="selectOption('1-5-q2', 1, 2)"><span class="opt-letter">B</span><span>Two fatty acid chains</span></div>
+<div class="opt" data-group="1-5-q2" onclick="selectOption('1-5-q2', 2, 2)"><span class="opt-letter">C</span><span>Three fatty acid chains</span></div>
+<div class="opt" data-group="1-5-q2" onclick="selectOption('1-5-q2', 3, 2)"><span class="opt-letter">D</span><span>Four fatty acid chains</span></div>
+      <div class="feedback" id="fb-1-5-q2">A triglyceride has exactly three fatty acid chains attached to a glycerol backbone.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="q-label">Question 3</span>
+      <span class="diff-badge diff-Medium">Medium</span>
+    </div>
+    <div class="card-body">
+      <p class="q-text">What structural feature distinguishes an unsaturated fatty acid from a saturated one?</p>
+      <div class="opt" data-group="1-5-q3" onclick="selectOption('1-5-q3', 0, 0)"><span class="opt-letter">A</span><span>The presence of at least one double bond</span></div>
+<div class="opt" data-group="1-5-q3" onclick="selectOption('1-5-q3', 1, 0)"><span class="opt-letter">B</span><span>The total number of carbon atoms present</span></div>
+<div class="opt" data-group="1-5-q3" onclick="selectOption('1-5-q3', 2, 0)"><span class="opt-letter">C</span><span>The presence of a phosphate group</span></div>
+<div class="opt" data-group="1-5-q3" onclick="selectOption('1-5-q3', 3, 0)"><span class="opt-letter">D</span><span>The number of hydroxyl groups present</span></div>
+      <div class="feedback" id="fb-1-5-q3">Unsaturated fatty acids contain at least one carbon-carbon double bond; saturated ones contain none.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="q-label">Question 4</span>
+      <span class="diff-badge diff-Hard">Hard</span>
+    </div>
+    <div class="card-body">
+      <p class="q-text">Phospholipids spontaneously arrange into a bilayer when placed in water. What property explains this behavior?</p>
+      <div class="opt" data-group="1-5-q4" onclick="selectOption('1-5-q4', 0, 1)"><span class="opt-letter">A</span><span>They contain only hydrophobic regions, which repel each other</span></div>
+<div class="opt" data-group="1-5-q4" onclick="selectOption('1-5-q4', 1, 1)"><span class="opt-letter">B</span><span>They are amphipathic, having both hydrophilic and hydrophobic regions</span></div>
+<div class="opt" data-group="1-5-q4" onclick="selectOption('1-5-q4', 2, 1)"><span class="opt-letter">C</span><span>They carry a strong negative charge that attracts water</span></div>
+<div class="opt" data-group="1-5-q4" onclick="selectOption('1-5-q4', 3, 1)"><span class="opt-letter">D</span><span>They form rigid crystalline structures that resist water entirely</span></div>
+      <div class="feedback" id="fb-1-5-q4">Phospholipids are amphipathic, so their heads face water while their tails cluster together, forming a bilayer.</div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-head">
+      <span class="q-label">Free Response</span>
+      <span class="diff-badge diff-Medium">FRQ</span>
+    </div>
+    <div class="card-body">
+      
+      
+      
+    <div class="frq-part">
+      <div class="frq-label">(a) Explain why triglycerides are considered efficient molecules for long-term energy storage.</div>
+      <textarea class="frq-input" placeholder="Write your response here..."></textarea>
+      <button type="button" class="sample-btn" onclick="toggleSample('sample-1-5-0')">Show sample response</button>
+      <div class="sample-box" id="sample-1-5-0"><b>Sample response:</b> Triglycerides consist mostly of energy-rich carbon-hydrogen bonds, and their hydrophobic nature allows them to be stored compactly without attracting water molecules, making them a dense and efficient way to store energy compared to carbohydrates.</div>
+    </div>
+
+    <div class="frq-part">
+      <div class="frq-label">(b) Describe the structural difference between a saturated and an unsaturated fat.</div>
+      <textarea class="frq-input" placeholder="Write your response here..."></textarea>
+      <button type="button" class="sample-btn" onclick="toggleSample('sample-1-5-1')">Show sample response</button>
+      <div class="sample-box" id="sample-1-5-1"><b>Sample response:</b> A saturated fat has no double bonds between the carbons in its fatty acid chains, allowing the chains to pack tightly together, while an unsaturated fat has at least one double bond, which creates a kink that prevents tight packing.</div>
+    </div>
+
+    <div class="frq-part">
+      <div class="frq-label">(c) Explain why the hydrophilic heads of phospholipids face outward toward water on both sides of a cell membrane.</div>
+      <textarea class="frq-input" placeholder="Write your response here..."></textarea>
+      <button type="button" class="sample-btn" onclick="toggleSample('sample-1-5-2')">Show sample response</button>
+      <div class="sample-box" id="sample-1-5-2"><b>Sample response:</b> Since the phospholipid heads are polar (hydrophilic) and the surrounding fluid on both sides of the membrane is water-based, the heads orient outward to interact favorably with water, while the nonpolar tails cluster together in the interior, away from water, forming the stable hydrophobic core of the membrane.</div>
+    </div>
+    </div>
+  </div>
+  <p class="footer-note">Topic 1.5 &middot; Lipids &mdash; Practice Quiz</p>
+</div>
+<script>
+function selectOption(qid, idx, correctIdx) {
+  var opts = document.querySelectorAll('[data-group="' + qid + '"]');
+  opts.forEach(function(o, i) {
+    o.classList.add("disabled");
+    if (i === correctIdx) o.classList.add("correct");
+    else if (i === idx) o.classList.add("incorrect");
+  });
+  var fb = document.getElementById("fb-" + qid);
+  if (fb) {
+    fb.classList.remove("good","bad");
+    fb.classList.add(idx === correctIdx ? "good" : "bad", "show");
+  }
+}
+function toggleSample(id) {
+  document.getElementById(id).classList.toggle("show");
+}
+</script>
+</body>
+</html>
